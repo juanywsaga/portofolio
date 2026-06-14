@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juan Yusaga Putra | Portfolio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --neon-cyan: #00f0ff;
+            --neon-pink: #ff00aa;
+            --neon-purple: #b400ff;
+            --neon-blue: #0044ff;
+            --dark-bg: #0a0a1a;
+            --card-bg: #111128;
+            --text-primary: #e0e0ff;
+            --text-secondary: #8888bb;
+        }
+
+        body {
+            font-family: Calibri, 'Segoe UI', Tahoma, sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ===== ANIMATED BG ===== */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 240, 255, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            z-index: 0;
+            pointer-events: none;
+            animation: gridPulse 8s ease-in-out infinite;
+        }
+
+        @keyframes gridPulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--dark-bg); }
+        ::-webkit-scrollbar-thumb {
+            background: var(--neon-cyan);
+            border-radius: 3px;
+            box-shadow: 0 0 10px var(--neon-cyan);
+        }
+
+        /* ===== NAVBAR ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(10, 10, 26, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 240, 255, 0.15);
+        }
+
+        .nav-logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 15px var(--neon-cyan), 0 0 30px var(--neon-cyan);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-pink);
+            box-shadow: 0 0 10px var(--neon-pink);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px var(--neon-cyan);
+        }
+
+        .nav-links a:hover::after { width: 100%; }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 2px;
+            background: var(--neon-cyan);
+            transition: 0.3s;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 40px 60px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+        }
+
+        .hero-avatar {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            border: 3px solid var(--neon-cyan);
+            box-shadow: 0 0 30px var(--neon-cyan), 0 0 60px rgba(0, 240, 255, 0.3);
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, var(--neon-purple), var(--neon-cyan));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            font-family: 'Orbitron', monospace;
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+
+        .hero-avatar span {
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 30px var(--neon-cyan), 0 0 60px rgba(0, 240, 255, 0.2); }
+            50% { box-shadow: 0 0 50px var(--neon-cyan), 0 0 100px rgba(0, 240, 255, 0.4); }
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .hero-subtitle {
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+            color: var(--neon-pink);
+            text-shadow: 0 0 15px var(--neon-pink);
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .hero-desc {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .glitch-text {
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 24px;
+            border: 1px solid var(--neon-pink);
+            border-radius: 50px;
+            color: var(--neon-pink);
+            font-family: 'Orbitron', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            box-shadow: 0 0 15px rgba(255, 0, 170, 0.3);
+            margin-bottom: 25px;
+            animation: badgePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes badgePulse {
+            0%, 100% { box-shadow: 0 0 15px rgba(255, 0, 170, 0.3); }
+            50% { box-shadow: 0 0 25px rgba(255, 0, 170, 0.6); }
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 32px;
+            border: 2px solid var(--neon-cyan);
+            border-radius: 4px;
+            color: var(--neon-cyan);
+            text-decoration: none;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            background: transparent;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before { left: 100%; }
+
+        .btn:hover {
+            background: rgba(0, 240, 255, 0.1);
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .btn-pink {
+            border-color: var(--neon-pink);
+            color: var(--neon-pink);
+        }
+
+        .btn-pink:hover {
+            background: rgba(255, 0, 170, 0.1);
+            box-shadow: 0 0 25px rgba(255, 0, 170, 0.4);
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        .hero-scroll a {
+            color: var(--neon-cyan);
+            font-size: 1.5rem;
+            text-decoration: none;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+
+        .hero-scroll a:hover { opacity: 1; }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        /* ===== SECTION COMMON ===== */
+        section {
+            position: relative;
+            z-index: 1;
+            padding: 100px 40px;
+        }
+
+        .section-label {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.75rem;
+            color: var(--neon-pink);
+            text-shadow: 0 0 10px var(--neon-pink);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+            margin-bottom: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-cyan), transparent);
+            box-shadow: 0 0 15px var(--neon-cyan);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* ===== ABOUT ===== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: start;
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+
+        .about-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .stat-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 240, 255, 0.1);
+            border-radius: 8px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-family: 'Orbitron', monospace;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--neon-cyan);
+            text-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ===== EDUCATION ===== */
+        .edu-timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .edu-timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 10px;
+            bottom: 10px;
+            width: 2px;
+            background: linear-gradient(180deg, var(--neon-cyan), var(--neon-pink), transparent);
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+        }
+
+        .edu-item {
+            position: relative;
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 240, 255, 0.08);
+            border-radius: 8px;
+            padding: 25px 30px;
+            margin-bottom: 30px;
+            transition: all 0.3s;
+        }
+
+        .edu-item:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .edu-item::before {
+            content: '';
+            position: absolute;
+            left: -33px;
+            top: 30px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--neon-cyan);
+            box-shadow: 0 0 15px var(--neon-cyan);
+            border: 2px solid var(--dark-bg);
+        }
+
+        .edu-year {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.8rem;
+            color: var(--neon-pink);
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+        }
+
+        .edu-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.1rem;
+            color: var(--neon-cyan);
+            margin-bottom: 5px;
+        }
+
+        .edu-school {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* ===== SKILLS ===== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-category {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 240, 255, 0.08);
+            border-radius: 8px;
+            padding: 30px;
+            transition: all 0.3s;
+        }
+
+        .skill-category:hover {
+            border-color: var(--neon-pink);
+            box-shadow: 0 0 30px rgba(255, 0, 170, 0.1);
+        }
+
+        .skill-cat-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 0.9rem;
+            color: var(--neon-pink);
+            text-shadow: 0 0 8px rgba(255, 0, 170, 0.3);
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .skill-bar-wrap {
+            margin-bottom: 18px;
+        }
+
+        .skill-bar-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .skill-bar-track {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .skill-bar-fill {
+            height: 100%;
+            border-radius: 3px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.4);
+            width: 0;
+            transition: width 1.5s ease;
+        }
+
+        /* ===== PROJECTS ===== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 240, 255, 0.08);
+            border-radius: 8px;
+            padding: 30px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--neon-cyan), var(--neon-pink));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .project-card:hover::before { opacity: 1; }
+
+        .project-card:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 40px rgba(0, 240, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .project-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .project-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+            color: var(--neon-cyan);
+            margin-bottom: 10px;
+        }
+
+        .project-desc {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .project-tech span {
+            padding: 4px 12px;
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--neon-cyan);
+            font-family: 'Orbitron', monospace;
+            letter-spacing: 1px;
+        }
+
+        /* ===== CONTACT ===== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px 20px;
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 240, 255, 0.08);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+        }
+
+        .contact-icon {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 240, 255, 0.1);
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .contact-text {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .contact-text strong {
+            color: var(--neon-cyan);
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .contact-form {
+            background: var(--card-bg);
+            border: 1px solid rgba(0, 240, 255, 0.08);
+            border-radius: 8px;
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.7rem;
+            color: var(--neon-cyan);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 240, 255, 0.15);
+            border-radius: 4px;
+            color: var(--text-primary);
+            font-family: Calibri, sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 40px;
+            border-top: 1px solid rgba(0, 240, 255, 0.08);
+            background: rgba(10, 10, 26, 0.8);
+        }
+
+        footer p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        footer .heart {
+            color: var(--neon-pink);
+            text-shadow: 0 0 10px var(--neon-pink);
+        }
+
+        /* ===== ANIME DECORATIVE ELEMENTS ===== */
+        .anime-sparkle {
+            position: absolute;
+            pointer-events: none;
+            font-size: 1.2rem;
+            opacity: 0;
+            animation: sparkleFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes sparkleFloat {
+            0%, 100% { opacity: 0; transform: translateY(0) scale(0.5); }
+            50% { opacity: 0.6; transform: translateY(-20px) scale(1); }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            nav { padding: 12px 20px; }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                background: rgba(10, 10, 26, 0.95);
+                backdrop-filter: blur(12px);
+                padding: 20px;
+                gap: 15px;
+                border-bottom: 1px solid rgba(0, 240, 255, 0.15);
+            }
+
+            .nav-links.active { display: flex; }
+
+            .hamburger { display: flex; }
+
+            .hero { padding: 100px 20px 40px; }
+            .hero-title { font-size: 2rem; }
+            .hero-avatar { width: 130px; height: 130px; font-size: 3rem; }
+
+            section { padding: 60px 20px; }
+            .section-title { font-size: 1.6rem; }
+
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-stats { grid-template-columns: 1fr 1fr; }
+
+            .skills-grid,
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .btn { padding: 10px 24px; font-size: 0.7rem; }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title { font-size: 1.5rem; }
+            .hero-badge { font-size: 0.6rem; padding: 6px 16px; }
+            .about-stats { grid-template-columns: 1fr; }
+            .edu-timeline { padding-left: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Particles Canvas -->
+    <canvas id="particles-canvas"></canvas>
+    <div class="bg-grid"></div>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav>
+        <a href="#" class="nav-logo">JUAN</a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about">Tentang</a></li>
+            <li><a href="#education">Pendidikan</a></li>
+            <li><a href="#skills">Keahlian</a></li>
+            <li><a href="#projects">Proyek</a></li>
+            <li><a href="#contact">Kontak</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger" onclick="toggleNav()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-avatar">
+                <span>⚡</span>
+            </div>
+            <div class="hero-badge">Cyberpunk Edition</div>
+            <h1 class="hero-title glitch-text">Juan Yusaga Putra</h1>
+            <p class="hero-subtitle">Sistem Komputer &bull; Network Engineer &bull; Cyber Enthusiast</p>
+            <p class="hero-desc">
+                Seorang profesional di bidang <strong>Sistem Komputer</strong> yang berfokus pada
+                jaringan, keamanan siber, dan pengembangan teknologi masa depan.
+                Menggabungkan logika sistem dengan kreativitas digital.
+            </p>
+            <div class="btn-group">
+                <a href="#projects" class="btn">Lihat Proyek</a>
+                <a href="#contact" class="btn btn-pink">Hubungi Saya</a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <a href="#about">&#8595;</a>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section id="about">
+        <div class="container">
+            <div class="section-label">// 01</div>
+            <h2 class="section-title">Tentang Saya</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>
+                        Saya <strong>Juan Yusaga Putra</strong>, seorang mahasiswa dan praktisi di bidang
+                        <strong>Sistem Komputer</strong>. Saya memiliki ketertarikan mendalam pada arsitektur
+                        jaringan komputer, keamanan siber, administrasi sistem, dan pengembangan perangkat
+                        lunak berbasis jaringan.
+                    </p>
+                    <p>
+                        Dunia <em>cyberpunk</em> menginspirasi saya untuk terus berinovasi — di mana teknologi
+                        tinggi dan kreativitas manusia bertemu. Saya percaya bahwa masa depan komputasi
+                        ada pada sistem yang terintegrasi, aman, dan cerdas.
+                    </p>
+                    <p>
+                        Saat ini saya aktif mempelajari <strong>Computer Network</strong>, <strong>Cyber Security</strong>,
+                        <strong>Linux Administration</strong>, serta <strong>Internet of Things (IoT)</strong>.
+                        Saya juga tertarik pada pengembangan web dan otomatisasi sistem.
+                    </p>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">3+</div>
+                        <div class="stat-label">Tahun Belajar</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">10+</div>
+                        <div class="stat-label">Proyek Terselesaikan</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">5+</div>
+                        <div class="stat-label">Sertifikasi</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">∞</div>
+                        <div class="stat-label">Rasa Ingin Tahu</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== EDUCATION ===== -->
+    <section id="education">
+        <div class="container">
+            <div class="section-label">// 02</div>
+            <h2 class="section-title">Pendidikan</h2>
+            <div class="edu-timeline">
+                <div class="edu-item">
+                    <div class="edu-year">2024 — Sekarang</div>
+                    <div class="edu-title">S1 Sistem Komputer</div>
+                    <div class="edu-school">
+                        Universitas — Fakultas Ilmu Komputer<br>
+                        Fokus: Jaringan Komputer, Keamanan Siber, Administrasi Sistem
+                    </div>
+                </div>
+                <div class="edu-item">
+                    <div class="edu-year">2021 — 2024</div>
+                    <div class="edu-title">SMA / Sederajat — Jurusan MIPA</div>
+                    <div class="edu-school">
+                        SMA Negeri —<br>
+                        Aktif dalam organisasi teknologi dan robotika sekolah
+                    </div>
+                </div>
+                <div class="edu-item">
+                    <div class="edu-year">2018 — 2021</div>
+                    <div class="edu-title">SMP / Sederajat</div>
+                    <div class="edu-school">
+                        SMP Negeri —<br>
+                        Mulai mengenal dasar-dasar pemrograman dan jaringan komputer
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SKILLS ===== -->
+    <section id="skills">
+        <div class="container">
+            <div class="section-label">// 03</div>
+            <h2 class="section-title">Keahlian</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <div class="skill-cat-title">Network & Infrastructure</div>
+                    <div class="skill-bar-wrap">
+                        <div class="skill-bar-info"><span>Jaringan Komputer (Cisco, MikroTik)</span><span>85%</span></div>
+                        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div>
+                    </div>
+                    <div class="skill-bar-wrap">
+                        <div class="skill-bar-info"><span>Linux Administration</span><span>80%</span></div>
+                        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:80%"></div></div>
+                    </div>
+                    <div class="skill-bar-wrap">
+                        <div class="skill-bar-info"><span>TCP/IP, Routing & Switching</span><span>90%</span></div>
+                        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:90%"></div></div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-cat-title">Cyber Security</div>
+                    <div class="skill-bar-wrap">
+                        <div class="skill-bar-info"><span>Network Security</span><span>78%</span></div>
+                        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:78%"></div></div>
+                    </div>
+                    <div class="skill-bar-wrap">
+                        <div class="skill-bar-info"><span>Penetration Testing</span><span>70%</span></div>
+                        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:70%"></div></div>
+                    </div>
+                    <div class="skill-bar-wrap">
+                        <div class="skill-bar-info"><span>Firewall & IDS/IPS</span><span>75%</span></div>
+                        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:75%"></div></div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <div class="skill-cat-title">Programming & Tools</div>
+                    <div class="skill-bar-wrap">
+                        <div class="skill-bar-info"><span>Python, Bash, SQL</span><span>82%</span></div>
+                        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:82%"></div></div>
+                    </div>
+                    <div class="skill-bar-wrap">
+                        <div class="skill-bar-info"><span>HTML, CSS, JavaScript</span><span>75%</span></div>
+                        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:75%"></div></div>
+                    </div>
+                    <div class="skill-bar-wrap">
+                        <div class="skill-bar-info"><span>IoT (Arduino, Raspberry Pi)</span><span>72%</span></div>
+                        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:72%"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROJECTS ===== -->
+    <section id="projects">
+        <div class="container">
+            <div class="section-label">// 04</div>
+            <h2 class="section-title">Proyek</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-icon">🌐</div>
+                    <div class="project-title">Network Monitoring System</div>
+                    <div class="project-desc">
+                        Membangun sistem monitoring jaringan berbasis SNMP dengan Grafana dan
+                        Prometheus untuk memantau trafik dan perangkat secara real-time.
+                    </div>
+                    <div class="project-tech">
+                        <span>SNMP</span>
+                        <span>Grafana</span>
+                        <span>Linux</span>
+                        <span>Python</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-icon">🔒</div>
+                    <div class="project-title">Cyber Security Audit Tool</div>
+                    <div class="project-desc">
+                        Mengembangkan tools audit keamanan dasar untuk scanning port, deteksi
+                        kerentanan, dan analisis log keamanan jaringan.
+                    </div>
+                    <div class="project-tech">
+                        <span>Python</span>
+                        <span>Nmap</span>
+                        <span>Bash</span>
+                        <span>Wireshark</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-icon">🤖</div>
+                    <div class="project-title">IoT Smart Home Gateway</div>
+                    <div class="project-desc">
+                        Prototipe gateway IoT menggunakan Raspberry Pi untuk mengontrol perangkat
+                        rumah pintar dengan keamanan enkripsi end-to-end.
+                    </div>
+                    <div class="project-tech">
+                        <span>Raspberry Pi</span>
+                        <span>MQTT</span>
+                        <span>Python</span>
+                        <span>ESP32</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-icon">⚡</div>
+                    <div class="project-title">Cyberpunk Portfolio Web</div>
+                    <div class="project-desc">
+                        Website portofolio pribadi bertema cyberpunk anime dengan animasi partikel,
+                        efek neon, dan desain responsif modern.
+                    </div>
+                    <div class="project-tech">
+                        <span>HTML</span>
+                        <span>CSS</span>
+                        <span>JS</span>
+                        <span>Canvas</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-label">// 05</div>
+            <h2 class="section-title">Hubungi Saya</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div class="contact-text">
+                            <strong>Email</strong>
+                            juan.yusaga@email.com
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📱</div>
+                        <div class="contact-text">
+                            <strong>Telepon</strong>
+                            +62 812-3456-7890
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-text">
+                            <strong>Lokasi</strong>
+                            Jakarta, Indonesia
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🔗</div>
+                        <div class="contact-text">
+                            <strong>LinkedIn / GitHub</strong>
+                            linkedin.com/in/juanyusaga
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form" onsubmit="event.preventDefault(); alert('Pesan terkirim! (Demo)')">
+                    <div class="form-group">
+                        <label>Nama</label>
+                        <input type="text" placeholder="Nama lengkap..." required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" placeholder="email@domain.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Pesan</label>
+                        <textarea placeholder="Tulis pesan Anda..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="width:100%;justify-content:center;">
+                        Kirim Pesan
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <p>
+            &copy; 2026 &mdash; Juan Yusaga Putra &bull;
+            Dibangun dengan <span class="heart">♥</span> dan semangat <em>Cyberpunk</em>
+        </p>
+    </footer>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+        // === Toggle Nav ===
+        function toggleNav() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('active');
+            });
+        });
+
+        // === Particles ===
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let W, H;
+
+        function resize() {
+            W = canvas.width = window.innerWidth;
+            H = canvas.height = window.innerHeight;
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        const particles = [];
+        const PARTICLE_COUNT = 120;
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * W;
+                this.y = Math.random() * H;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = (Math.random() - 0.5) * 0.8;
+                this.speedY = (Math.random() - 0.5) * 0.8;
+                this.opacity = Math.random() * 0.6 + 0.2;
+                this.color = Math.random() > 0.5 ? '#00f0ff' : '#ff00aa';
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x < 0 || this.x > W || this.y < 0 || this.y > H) this.reset();
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = this.color;
+                ctx.globalAlpha = this.opacity;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+                ctx.globalAlpha = 1;
+            }
+        }
+
+        for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
+
+        let mouseX = -1000, mouseY = -1000;
+        document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
+
+        function connectParticles() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 140) {
+                        const opacity = 1 - dist / 140;
+                        const grad = ctx.createLinearGradient(
+                            particles[i].x, particles[i].y,
+                            particles[j].x, particles[j].y
+                        );
+                        grad.addColorStop(0, 'rgba(0, 240, 255, ' + (opacity * 0.25) + ')');
+                        grad.addColorStop(1, 'rgba(255, 0, 170, ' + (opacity * 0.25) + ')');
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = grad;
+                        ctx.lineWidth = 1;
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, W, H);
+            particles.forEach(p => { p.update(); p.draw(); });
+            connectParticles();
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // === Skill bars animate on scroll ===
+        const skillBars = document.querySelectorAll('.skill-bar-fill');
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const width = entry.target.style.width;
+                    entry.target.style.width = '0';
+                    setTimeout(() => { entry.target.style.width = width; }, 200);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        skillBars.forEach(bar => skillObserver.observe(bar));
+    </script>
+
+</body>
+</html>
